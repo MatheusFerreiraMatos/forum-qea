@@ -7,6 +7,8 @@ import br.mftech.projeto.qaforum.repository.CategoryRepository;
 import br.mftech.projeto.qaforum.repository.TopicRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -33,6 +35,7 @@ public class TopicController {
     }
 
     @GetMapping
+    @Cacheable(value = "listTopics")
     public Page<TopicResponse> list(@RequestParam(required = false) String nameCategory,
                                     @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
@@ -47,6 +50,7 @@ public class TopicController {
 
     @PostMapping
     @Transactional
+    @CacheEvict(value = "listTopics", allEntries = true)
     public ResponseEntity<TopicResponse> register(@RequestBody @Valid TopicRequest topicRequest, UriComponentsBuilder uriBuilder) {
         Topic topic = topicRequest.convert(categoryRepository);
         topicRepository.save(topic);
@@ -66,6 +70,7 @@ public class TopicController {
 
     @PutMapping("/{id}")
     @Transactional
+    @CacheEvict(value = "listTopics", allEntries = true)
     public ResponseEntity<TopicResponse> update(@PathVariable Long id, @RequestBody @Valid TopicRequest topicRequest) {
         Optional<Topic> optional = topicRepository.findById(id);
         if (optional.isPresent()) {
@@ -77,6 +82,7 @@ public class TopicController {
 
     @DeleteMapping("{id}")
     @Transactional
+    @CacheEvict(value = "listTopics", allEntries = true)
     public ResponseEntity<?> remove(@PathVariable Long id) {
         Optional<Topic> optional = topicRepository.findById(id);
         if (optional.isPresent()) {
