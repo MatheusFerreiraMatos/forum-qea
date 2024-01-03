@@ -4,6 +4,7 @@ import br.mftech.projeto.qaforum.model.Collaboration;
 import br.mftech.projeto.qaforum.model.StatusTopic;
 import br.mftech.projeto.qaforum.model.Topic;
 import lombok.Getter;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class TopicResponse {
         this.answers.addAll(topic.getResponse().stream().map(CollaborationResponse::new).collect(Collectors.toList()));
     }
 
-    public static List<TopicResponse> convert(List<Topic> topics) {
-        return topics.stream().map(TopicResponse::new).collect(Collectors.toList());
+    public static Page<TopicResponse> convert(Page<Topic> topics) {
+        return topics.map(TopicResponse::new);
     }
 }

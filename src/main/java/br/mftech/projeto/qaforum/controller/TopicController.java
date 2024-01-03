@@ -7,32 +7,40 @@ import br.mftech.projeto.qaforum.repository.CategoryRepository;
 import br.mftech.projeto.qaforum.repository.TopicRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/topics")
-public class TopicsController {
+public class TopicController {
 
-    @Autowired
     private TopicRepository topicRepository;
-
-    @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    public TopicController(TopicRepository topicRepository, CategoryRepository categoryRepository) {
+        this.topicRepository = topicRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
     @GetMapping
-    public List<TopicResponse> list(String nameCategory) {
+    public Page<TopicResponse> list(@RequestParam(required = false) String nameCategory,
+                                    @PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+
         if (nameCategory == null) {
-            List<Topic> topics = topicRepository.findAll();
+            Page<Topic> topics = topicRepository.findAll(pageable);
             return TopicResponse.convert(topics);
         } else {
-            List<Topic> topics = topicRepository.findByCategoryName(nameCategory);
+            Page<Topic> topics = topicRepository.findByCategoryName(nameCategory, pageable);
             return TopicResponse.convert(topics);
         }
     }
