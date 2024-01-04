@@ -1,7 +1,7 @@
 package br.mftech.projeto.qaforum.controller;
 
-import br.mftech.projeto.qaforum.controller.request.TopicRequest;
-import br.mftech.projeto.qaforum.controller.response.TopicResponse;
+import br.mftech.projeto.qaforum.controller.dto.request.TopicRequest;
+import br.mftech.projeto.qaforum.controller.dto.response.TopicResponse;
 import br.mftech.projeto.qaforum.model.Topic;
 import br.mftech.projeto.qaforum.repository.CategoryRepository;
 import br.mftech.projeto.qaforum.repository.TopicRepository;

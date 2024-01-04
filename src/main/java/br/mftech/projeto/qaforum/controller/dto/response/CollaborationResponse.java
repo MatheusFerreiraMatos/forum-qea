@@ -1,4 +1,4 @@
-package br.mftech.projeto.qaforum.controller.response;
+package br.mftech.projeto.qaforum.controller.dto.response;
 
 import br.mftech.projeto.qaforum.model.Collaboration;
 import lombok.Getter;

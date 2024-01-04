@@ -1,4 +1,4 @@
-package br.mftech.projeto.qaforum.controller.request;
+package br.mftech.projeto.qaforum.controller.dto.request;
 
 import br.mftech.projeto.qaforum.model.Category;
 import br.mftech.projeto.qaforum.model.Topic;

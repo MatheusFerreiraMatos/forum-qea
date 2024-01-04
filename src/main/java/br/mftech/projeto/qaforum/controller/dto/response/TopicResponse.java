@@ -1,6 +1,5 @@
-package br.mftech.projeto.qaforum.controller.response;
+package br.mftech.projeto.qaforum.controller.dto.response;
 
-import br.mftech.projeto.qaforum.model.Collaboration;
 import br.mftech.projeto.qaforum.model.StatusTopic;
 import br.mftech.projeto.qaforum.model.Topic;
 import lombok.Getter;

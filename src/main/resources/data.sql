@@ -1,4 +1,4 @@
-INSERT INTO MEMBER(first_name, last_name, email, password) VALUES('Matheus', 'Matos', 'matheus.matos@forumqa.com', '123456');
+INSERT INTO MEMBER(first_name, last_name, username, email, password) VALUES('Matheus', 'Matos', 'mftech', 'matheus.matos@forumqa.com', '123456');
 
 INSERT INTO CATEGORY(name) VALUES('Java');
 INSERT INTO CATEGORY(name) VALUES('Spring Boot');
